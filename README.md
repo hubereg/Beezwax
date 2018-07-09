@@ -23,4 +23,4 @@ To run the application locally, run the following command:
 
 `yarn start`
 
-Alternatively, you may build the application's static assets with `yarn build` followed by serving them locally with `yarn start:production`.
+Alternatively, you may build the application's static assets and serve them locally with `yarn start:production`.
