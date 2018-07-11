@@ -35,7 +35,7 @@ class Login extends PureComponent {
 
         <form className="Login-form" noValidate>
           <input
-            type="username"
+            type="text"
             name="username"
             id="username"
             placeholder="User Name"
