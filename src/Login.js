@@ -1,14 +1,15 @@
 import React, { PureComponent } from 'react';
 import { Link } from 'react-router-dom';
 
-import LoginReadme from './LoginReadme'
+import LoginReadme from './LoginReadme';
 import './Login.css';
 
 class Login extends PureComponent {
   state = {
     username: '',
     password: '',
-    submitted: false
+    submitted: false,
+    working: false
   };
 
   handleChange = control => event => {
@@ -22,12 +23,19 @@ class Login extends PureComponent {
     event.preventDefault();
 
     this.setState({
-      submitted: true
+      working: true
     });
+
+    setTimeout(() => {
+      this.setState({
+        working: false,
+        submitted: true
+      });
+    }, 3000);
   };
 
   render() {
-    const { username, password, submitted } = this.state;
+    const { username, password, submitted, working } = this.state;
 
     return (
       <div className="Login">
@@ -42,6 +50,7 @@ class Login extends PureComponent {
             onChange={this.handleChange('username')}
             value={username}
             required
+            disabled={working}
           />
 
           <input
@@ -52,20 +61,21 @@ class Login extends PureComponent {
             onChange={this.handleChange('password')}
             value={password}
             required
+            disabled={working}
           />
 
           <button
             type="submit"
             name="submit"
             id="submit"
-            disabled={!username || !password}
+            disabled={working || !username || !password}
             onClick={this.handleSubmit}
           >
-            Login
+            {working ? 'Logging in...' : 'Login'}
           </button>
         </form>
 
-        {submitted && (
+        {!working && submitted && (
           <pre>
             {[`Username: ${username}`, `Password: ${password}`].join('\n')}
           </pre>
